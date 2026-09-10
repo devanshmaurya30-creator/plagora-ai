@@ -1,0 +1,17 @@
+{
+  "short_name": "Plagora AI",
+  "name": "Plagora AI — AI-Powered Plagiarism & Originality Analysis",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "display": "standalone",
+  "orientation": "portrait"
+}

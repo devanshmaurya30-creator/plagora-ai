@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#000000" />
+    
+    <!-- SEO Primary Meta Tags -->
+    <title>Plagora AI — AI-Powered Plagiarism & Originality Analysis</title>
+    <meta name="title" content="Plagora AI — AI-Powered Plagiarism & Originality Analysis" />
+    <meta name="description" content="Analyze documents for copied, paraphrased, and semantically similar content with advanced AI-powered detection, live activity tracking, and enterprise PDF reporting." />
+    
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Plagora AI — AI-Powered Plagiarism & Originality Analysis" />
+    <meta property="og:description" content="Analyze documents for copied, paraphrased, and semantically similar content with advanced AI-powered detection and live web verification." />
+    <meta property="og:image" content="/logo.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:title" content="Plagora AI — AI-Powered Plagiarism & Originality Analysis" />
+    <meta property="twitter:description" content="Analyze documents for copied, paraphrased, and semantically similar content with advanced AI-powered detection." />
+    <meta property="twitter:image" content="/logo.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-black text-slate-100 antialiased selection:bg-white/20 selection:text-white font-sans overflow-x-hidden min-h-screen">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+  </body>
+</html>
