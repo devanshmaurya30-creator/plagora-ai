@@ -80,10 +80,10 @@ export const HeroSection: React.FC = () => {
           {/* Main Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]"
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1]"
           >
             Detect plagiarism with <br />
-            <span className="font-serif-italic text-transparent bg-clip-text bg-gradient-to-r from-slate-900 via-slate-700 to-slate-900 dark:from-white dark:via-slate-200 dark:to-slate-400">
+            <span className="font-serif-italic text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
               AI-level precision.
             </span>
           </motion.h1>
@@ -91,7 +91,7 @@ export const HeroSection: React.FC = () => {
           {/* Supporting Subtitle */}
           <motion.p
             variants={itemVariants}
-            className="max-w-2xl mx-auto text-base sm:text-lg text-slate-600 dark:text-slate-400 font-normal leading-relaxed"
+            className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 dark:text-slate-400 font-normal leading-relaxed"
           >
             Analyze documents for exact, paraphrased, and semantically similar content with
             evidence-grounded AI intelligence.
@@ -133,36 +133,36 @@ export const HeroSection: React.FC = () => {
           {/* Bottom Statistics Cards */}
           <motion.div
             variants={itemVariants}
-            className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto border-t border-slate-200 dark:border-white/[0.08]"
+            className="pt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto border-t border-white/[0.08]"
           >
-            <TiltCard maxRotate={2.5} liftY={-6} className="p-6 text-center bg-white/70 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/10">
-              <div className="flex items-center justify-center gap-2 text-slate-900 dark:text-white font-extrabold text-2xl">
+            <TiltCard maxRotate={2.5} liftY={-6} className="p-6 text-center bg-white/[0.03] dark:bg-white/[0.02] border-white/10 dark:border-white/10">
+              <div className="flex items-center justify-center gap-2 text-white font-extrabold text-2xl">
                 <MagneticIcon maxOffset={3}>
-                  <ShieldCheck className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
+                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
                 </MagneticIcon>
                 <span>99%+</span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">semantic detection coverage</p>
+              <p className="text-xs text-slate-400 mt-1">semantic detection coverage</p>
             </TiltCard>
 
-            <TiltCard maxRotate={2.5} liftY={-6} className="p-6 text-center bg-white/70 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/10">
-              <div className="flex items-center justify-center gap-2 text-slate-900 dark:text-white font-extrabold text-2xl">
+            <TiltCard maxRotate={2.5} liftY={-6} className="p-6 text-center bg-white/[0.03] dark:bg-white/[0.02] border-white/10 dark:border-white/10">
+              <div className="flex items-center justify-center gap-2 text-white font-extrabold text-2xl">
                 <MagneticIcon maxOffset={3}>
-                  <Zap className="w-5 h-5 text-cyan-600 dark:text-blue-400" />
+                  <Zap className="w-5 h-5 text-cyan-400" />
                 </MagneticIcon>
                 <span>Millions</span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">of passages analyzed</p>
+              <p className="text-xs text-slate-400 mt-1">of passages analyzed</p>
             </TiltCard>
 
-            <TiltCard maxRotate={2.5} liftY={-6} className="p-6 text-center bg-white/70 dark:bg-white/[0.02] border-slate-200/80 dark:border-white/10">
-              <div className="flex items-center justify-center gap-2 text-slate-900 dark:text-white font-extrabold text-2xl">
+            <TiltCard maxRotate={2.5} liftY={-6} className="p-6 text-center bg-white/[0.03] dark:bg-white/[0.02] border-white/10 dark:border-white/10">
+              <div className="flex items-center justify-center gap-2 text-white font-extrabold text-2xl">
                 <MagneticIcon maxOffset={3}>
-                  <Award className="w-5 h-5 text-amber-500 dark:text-amber-400" />
+                  <Award className="w-5 h-5 text-amber-400" />
                 </MagneticIcon>
                 <span>Trusted</span>
               </div>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">by writers & researchers</p>
+              <p className="text-xs text-slate-400 mt-1">by writers & researchers</p>
             </TiltCard>
           </motion.div>
         </motion.div>
