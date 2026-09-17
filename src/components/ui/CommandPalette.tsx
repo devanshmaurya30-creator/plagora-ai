@@ -187,9 +187,9 @@ export const CommandPalette: React.FC = () => {
 
         {/* Command Palette Modal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: -15, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, scale: 1, y: 0, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, scale: 0.96, y: -10, filter: 'blur(4px)' }}
+          initial={{ opacity: 0, scale: 0.96, y: -15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.96, y: -10 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full max-w-xl rounded-3xl border border-white/20 bg-neutral-950 p-4 space-y-4 shadow-2xl text-slate-100 overflow-hidden"
         >

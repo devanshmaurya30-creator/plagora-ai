@@ -18,8 +18,12 @@ export function getStoredTheme(): Theme {
 }
 
 export function getEffectiveTheme(theme: Theme): 'dark' | 'light' {
-  if (theme === 'system' && typeof window !== 'undefined') {
-    return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+  if (theme === 'system' && typeof window !== 'undefined' && window.matchMedia) {
+    try {
+      return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    } catch (e) {
+      return 'dark';
+    }
   }
   return theme === 'light' ? 'light' : 'dark';
 }
@@ -58,14 +62,24 @@ export function useTheme() {
   }, [theme]);
 
   useEffect(() => {
-    if (theme !== 'system') return;
-    const media = window.matchMedia('(prefers-color-scheme: light)');
-    const handleChange = () => {
-      applyTheme('system');
-      setEffectiveTheme(getEffectiveTheme('system'));
-    };
-    media.addEventListener('change', handleChange);
-    return () => media.removeEventListener('change', handleChange);
+    if (theme !== 'system' || typeof window === 'undefined' || !window.matchMedia) return;
+    try {
+      const media = window.matchMedia('(prefers-color-scheme: light)');
+      const handleChange = () => {
+        applyTheme('system');
+        setEffectiveTheme(getEffectiveTheme('system'));
+      };
+
+      if (media.addEventListener) {
+        media.addEventListener('change', handleChange);
+        return () => media.removeEventListener('change', handleChange);
+      } else if ((media as any).addListener) {
+        (media as any).addListener(handleChange);
+        return () => (media as any).removeListener(handleChange);
+      }
+    } catch (e) {
+      // fallback
+    }
   }, [theme]);
 
   const setTheme = (newTheme: Theme) => {
