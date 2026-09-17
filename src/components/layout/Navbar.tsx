@@ -86,8 +86,8 @@ export const Navbar: React.FC = () => {
         <Link to="/" className="flex items-center gap-3 group select-none">
           <ClickRipple className="rounded-2xl p-1">
             <motion.div
-              initial={{ opacity: 0, scale: 0.88, filter: 'blur(8px)' }}
-              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              initial={{ opacity: 0, scale: 0.88 }}
+              animate={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95, y: 0 }}
               transition={{ type: 'spring', stiffness: 450, damping: 25 }}
@@ -248,11 +248,11 @@ export const Navbar: React.FC = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0, backdropFilter: 'blur(0px)' }}
-            animate={{ opacity: 1, height: 'auto', backdropFilter: 'blur(20px)' }}
-            exit={{ opacity: 0, height: 0, backdropFilter: 'blur(0px)' }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="md:hidden border-b border-slate-200 dark:border-white/15 bg-white/95 dark:bg-black/95 px-6 py-6 overflow-hidden shadow-xl"
+            className="md:hidden border-b border-slate-200 dark:border-white/15 bg-white/95 dark:bg-black/95 backdrop-blur-xl px-6 py-6 overflow-hidden shadow-xl"
           >
             <motion.div
               initial="hidden"
@@ -271,8 +271,8 @@ export const Navbar: React.FC = () => {
                 <motion.div
                   key={item.label}
                   variants={{
-                    hidden: { opacity: 0, x: -12, filter: 'blur(4px)' },
-                    visible: { opacity: 1, x: 0, filter: 'blur(0px)' },
+                    hidden: { opacity: 0, x: -12 },
+                    visible: { opacity: 1, x: 0 },
                   }}
                 >
                   <button

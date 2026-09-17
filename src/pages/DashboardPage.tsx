@@ -41,9 +41,9 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 15, filter: 'blur(8px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      exit={{ opacity: 0, y: -12, filter: 'blur(6px)' }}
+      initial={{ opacity: 0, y: 15 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -12 }}
       transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 sm:space-y-10 min-h-screen select-none text-slate-900 dark:text-slate-100"
     >

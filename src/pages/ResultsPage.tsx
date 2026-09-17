@@ -400,11 +400,11 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
             {selectedMatch && (
               <motion.div
                 key={selectedMatch.id}
-                initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: 20, filter: 'blur(4px)' }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                className="space-y-8 pt-4 border-t border-white/10"
+                className="space-y-8 pt-4 border-t border-slate-200 dark:border-white/10"
               >
                 {/* Side-by-Side Comparison */}
                 <div className="rounded-3xl border border-white/20 bg-neutral-950/90 p-6 md:p-8 space-y-4 shadow-2xl backdrop-blur-2xl">

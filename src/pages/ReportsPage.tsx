@@ -235,9 +235,9 @@ export const ReportsPage: React.FC = () => {
                       <motion.tr
                         key={item.id}
                         layout
-                        initial={{ opacity: 0, y: 12, filter: 'blur(4px)' }}
-                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                        exit={{ opacity: 0, scale: 0.96, filter: 'blur(4px)' }}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.96 }}
                         transition={{ delay: idx * 0.03, ease: [0.16, 1, 0.3, 1] }}
                         className="hover:bg-slate-50 dark:hover:bg-white/[0.04] transition-colors group"
                       >

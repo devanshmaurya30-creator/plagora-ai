@@ -39,19 +39,17 @@ export const slowAmbientTransition: Transition = {
   repeatType: 'mirror',
 };
 
-// Page Transition Presets (<400ms cinematic feel)
+// Page Transition Presets (<400ms GPU-accelerated feel)
 export const pageTransitionVariants: Variants = {
   initial: {
     opacity: 0,
     y: 12,
     scale: 0.99,
-    filter: 'blur(8px)',
   },
   animate: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: 'blur(0px)',
     transition: {
       duration: 0.38,
       ease: [0.16, 1, 0.3, 1],
@@ -62,7 +60,6 @@ export const pageTransitionVariants: Variants = {
     opacity: 0,
     y: -8,
     scale: 0.98,
-    filter: 'blur(6px)',
     transition: {
       duration: 0.22,
       ease: 'easeIn',
@@ -91,33 +88,29 @@ export const containerStaggerVariants: Variants = {
 
 // Item Entrance Variants
 export const itemFadeUpVariants: Variants = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
+  hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: smoothEaseTransition,
   },
   exit: {
     opacity: 0,
     y: -12,
-    filter: 'blur(4px)',
     transition: { duration: 0.25, ease: 'easeIn' },
   },
 };
 
 export const itemScaleVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95, filter: 'blur(6px)' },
+  hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
     transition: smoothEaseTransition,
   },
   exit: {
     opacity: 0,
     scale: 0.95,
-    filter: 'blur(4px)',
     transition: { duration: 0.2 },
   },
 };
@@ -157,52 +150,46 @@ export const buttonMotionVariants: Variants = {
 
 // Modal Backdrop & Content Variants
 export const modalBackdropVariants: Variants = {
-  hidden: { opacity: 0, backdropFilter: 'blur(0px)' },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    backdropFilter: 'blur(12px)',
     transition: { duration: 0.3 },
   },
   exit: {
     opacity: 0,
-    backdropFilter: 'blur(0px)',
     transition: { duration: 0.25 },
   },
 };
 
 export const modalContentVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.94, y: 15, filter: 'blur(8px)' },
+  hidden: { opacity: 0, scale: 0.94, y: 15 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
   },
   exit: {
     opacity: 0,
     scale: 0.95,
     y: 10,
-    filter: 'blur(4px)',
     transition: { duration: 0.2, ease: 'easeIn' },
   },
 };
 
 // Dropdown Variants
 export const dropdownVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.95, y: -6, filter: 'blur(4px)' },
+  hidden: { opacity: 0, scale: 0.95, y: -6 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: fastSpringTransition,
   },
   exit: {
     opacity: 0,
     scale: 0.96,
     y: -4,
-    filter: 'blur(4px)',
     transition: { duration: 0.15 },
   },
 };
