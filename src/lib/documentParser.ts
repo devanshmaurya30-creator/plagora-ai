@@ -1,14 +1,7 @@
 import './polyfills';
-import * as pdfjsLib from 'pdfjs-dist';
-import pdfWorker from 'pdfjs-dist/build/pdf.worker.min.js?url';
 import mammoth from 'mammoth';
 import type { ParsedDocument, SupportedFileType } from '../types/document';
 import { cleanText, countWords } from './textProcessor';
-
-// Configure local pdfjs worker with fallback support
-if (typeof window !== 'undefined' && pdfjsLib.GlobalWorkerOptions) {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker;
-}
 
 const MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024; // 20 MB
 
@@ -151,6 +144,10 @@ export async function parseDOCX(file: File): Promise<ParsedDocument> {
   }
 }
 
+/**
+ * Lazy-loads PDF.js ONLY when the user actually uploads a PDF file.
+ * This guarantees zero PDF.js startup overhead and zero blank screen crashes during app load.
+ */
 export async function parsePDF(file: File): Promise<ParsedDocument> {
   try {
     const arrayBuffer = await readFileAsArrayBuffer(file);
@@ -161,7 +158,19 @@ export async function parsePDF(file: File): Promise<ParsedDocument> {
     // Convert ArrayBuffer to Uint8Array for TypedArray compatibility across WebKit/V8
     const uint8Array = new Uint8Array(arrayBuffer);
 
-    let pdf: pdfjsLib.PDFDocumentProxy;
+    // Dynamically import PDF.js legacy browser build and local worker URL on demand ONLY
+    const [pdfjsLib, workerModule] = await Promise.all([
+      import('pdfjs-dist/legacy/build/pdf.js'),
+      import('pdfjs-dist/legacy/build/pdf.worker.min.js?url'),
+    ]);
+
+    const workerSrc = (workerModule as any).default || workerModule;
+
+    if (typeof window !== 'undefined' && pdfjsLib.GlobalWorkerOptions) {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = workerSrc;
+    }
+
+    let pdf: any;
 
     try {
       const loadingTask = pdfjsLib.getDocument({
@@ -176,7 +185,7 @@ export async function parsePDF(file: File): Promise<ParsedDocument> {
       pdf = await loadingTask.promise;
     } catch (primaryErr: any) {
       console.warn('[Plagora PDF Engine] Primary worker load failed, attempting inline parsing fallback:', primaryErr);
-      
+
       // Inline worker fallback for restrictive mobile webview sandboxes
       try {
         const fallbackTask = pdfjsLib.getDocument({
@@ -209,7 +218,7 @@ export async function parsePDF(file: File): Promise<ParsedDocument> {
         if (textContent && Array.isArray(textContent.items)) {
           const pageStrings = textContent.items
             .map((item: any) => (item && typeof item.str === 'string' ? item.str : ''))
-            .filter((str) => str.trim().length > 0)
+            .filter((str: string) => str.trim().length > 0)
             .join(' ');
           if (pageStrings.trim()) {
             fullText += pageStrings + '\n\n';

@@ -78,8 +78,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
         rotateX: isDesktop && enableTilt ? rotateX : 0,
         rotateY: isDesktop && enableTilt ? rotateY : 0,
         y: isHovered ? liftY : 0,
-        scale: isHovered ? 1.01 : 1,
-        borderColor: isHovered ? 'rgba(255, 255, 255, 0.22)' : 'rgba(255, 255, 255, 0.08)',
+        scale: isHovered ? 1.008 : 1,
       }}
       transition={{
         type: 'spring',
@@ -90,14 +89,14 @@ export const TiltCard: React.FC<TiltCardProps> = ({
         transformStyle: 'preserve-3d',
         perspective: 1000,
       }}
-      className={`relative rounded-2xl glass-panel glass-panel-hover transition-colors duration-200 cursor-pointer overflow-hidden ${className}`}
+      className={`relative rounded-2xl glass-panel glass-panel-hover transition-all duration-200 cursor-pointer overflow-hidden ${className}`}
     >
       {/* Dynamic Simulated Light Glare Layer (Opposite mouse position) */}
       {isDesktop && enableTilt && (
         <div
-          className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-20"
+          className="absolute inset-0 pointer-events-none transition-opacity duration-300 z-10 hidden dark:block"
           style={{
-            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.03) 45%, transparent 75%)`,
+            background: `radial-gradient(circle at ${glarePos.x}% ${glarePos.y}%, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 45%, transparent 75%)`,
             opacity: glarePos.opacity,
           }}
         />
@@ -108,7 +107,7 @@ export const TiltCard: React.FC<TiltCardProps> = ({
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="absolute inset-0 -z-10 rounded-2xl bg-white/[0.03] blur-lg pointer-events-none"
+          className="absolute inset-0 -z-10 rounded-2xl bg-cyan-500/5 dark:bg-white/[0.03] blur-lg pointer-events-none"
         />
       )}
 

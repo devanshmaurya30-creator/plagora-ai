@@ -14,7 +14,7 @@ export const Badge: React.FC<BadgeProps> = ({ children, icon = true, className =
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/[0.04] backdrop-blur-md text-xs font-semibold tracking-wider uppercase text-slate-300 shadow-[0_0_15px_rgba(255,255,255,0.03)] ${className}`}
+      className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-200 dark:border-white/15 bg-white dark:bg-white/[0.04] backdrop-blur-md text-xs font-semibold tracking-wider uppercase text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-[0_0_15px_rgba(255,255,255,0.03)] ${className}`}
     >
       {icon && (
         <motion.span

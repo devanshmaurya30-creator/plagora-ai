@@ -160,27 +160,27 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
       className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 min-h-screen select-none"
     >
       {/* Top Header & Quick Actions */}
-      <motion.div variants={itemFadeUpVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <motion.div variants={itemFadeUpVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate('/dashboard')}
-            className="p-2 rounded-xl border border-white/10 bg-white/5 text-slate-300 hover:text-white hover:border-white/20 transition-colors"
+            className="p-2 rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:border-slate-300 dark:hover:border-white/20 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <h1 className="text-xl font-bold text-white tracking-tight">{analysis.documentName}</h1>
+              <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">{analysis.documentName}</h1>
               <button
                 onClick={handleCopyId}
-                className="px-2 py-0.5 rounded text-[10px] uppercase font-mono bg-white/10 text-slate-300 border border-white/10 hover:border-white/30 transition-colors flex items-center gap-1"
+                className="px-2 py-0.5 rounded text-[10px] uppercase font-mono bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/30 transition-colors flex items-center gap-1 cursor-pointer"
                 title="Click to copy Report ID"
               >
-                {copiedId ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                {copiedId ? <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-3 h-3" />}
                 <span>PLA-{analysis.id.slice(0, 8).toUpperCase()}</span>
               </button>
             </div>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
               Scanned on {new Date(analysis.createdAt).toLocaleDateString()} • {analysis.wordCount.toLocaleString()} words
             </p>
           </div>
@@ -192,7 +192,7 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
             variant="outline"
             size="sm"
             onClick={() => setShowResearchWorkspace(true)}
-            icon={<BookOpen className="w-4 h-4 text-emerald-400" />}
+            icon={<BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />}
           >
             Research Workspace
           </Button>
@@ -201,7 +201,7 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
             variant="outline"
             size="sm"
             onClick={() => setShowAIChat(true)}
-            icon={<MessageSquare className="w-4 h-4 text-cyan-400" />}
+            icon={<MessageSquare className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />}
           >
             Ask Plagora AI
           </Button>
@@ -211,13 +211,13 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
               variant="outline"
               size="sm"
               onClick={() => setShowVersionHistory(true)}
-              icon={<History className="w-4 h-4 text-blue-400" />}
+              icon={<History className="w-4 h-4 text-blue-600 dark:text-blue-400" />}
             >
               Versions
             </Button>
           )}
 
-          <Button variant="ghost" size="sm" onClick={handleCopySummary} icon={copiedSummary ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}>
+          <Button variant="ghost" size="sm" onClick={handleCopySummary} icon={copiedSummary ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}>
             {copiedSummary ? 'Copied' : 'Copy Summary'}
           </Button>
 
@@ -242,7 +242,7 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
 
           <button
             onClick={() => setShowDeleteModal(true)}
-            className="p-2 text-slate-500 hover:text-red-400 border border-white/10 rounded-xl hover:bg-white/5 transition-colors"
+            className="p-2 text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
             title="Delete report"
           >
             <Trash2 className="w-4 h-4" />
@@ -251,20 +251,20 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
       </motion.div>
 
       {/* Dynamic Factual Summary Banner */}
-      <motion.div variants={itemFadeUpVariants} className="p-4 rounded-2xl border border-white/10 bg-white/[0.015] text-xs text-slate-300 flex items-center justify-between gap-4 flex-wrap">
+      <motion.div variants={itemFadeUpVariants} className="p-4 rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-white/[0.015] text-xs text-slate-700 dark:text-slate-300 flex items-center justify-between gap-4 flex-wrap shadow-sm">
         <span>
-          <strong className="text-white">Analysis Summary: </strong>
+          <strong className="text-slate-900 dark:text-white">Analysis Summary: </strong>
           {analysis.matches.length > 0
             ? `${analysis.matches.length} potential matches detected across ${analysis.sources.length} verified web sources with ${analysis.similarityScore}% overall similarity.`
             : 'No significant similarity matches detected above scanning confidence thresholds.'}
         </span>
 
         {/* Tab Switcher */}
-        <div className="flex items-center gap-1 bg-white/5 border border-white/10 p-1 rounded-xl">
+        <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 p-1 rounded-xl">
           <button
             onClick={() => setActiveTab('Matches')}
             className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
-              activeTab === 'Matches' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white'
+              activeTab === 'Matches' ? 'bg-slate-900 text-white dark:bg-white/20 dark:text-white' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Matches & Proof
@@ -272,7 +272,7 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
           <button
             onClick={() => setActiveTab('Insights')}
             className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
-              activeTab === 'Insights' ? 'bg-white/20 text-white' : 'text-slate-400 hover:text-white'
+              activeTab === 'Insights' ? 'bg-slate-900 text-white dark:bg-white/20 dark:text-white' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Deep Insights
@@ -280,7 +280,7 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
           <button
             onClick={() => setActiveTab('Improvement')}
             className={`px-3 py-1 rounded-lg text-xs font-semibold transition-all ${
-              activeTab === 'Improvement' ? 'bg-amber-500/20 text-amber-300 border border-amber-400/30' : 'text-slate-400 hover:text-white'
+              activeTab === 'Improvement' ? 'bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-400/30' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
             Improvement Loop
@@ -328,9 +328,9 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
             />
 
             {/* Dynamic Filter Pills */}
-            <div className="flex items-center justify-between flex-wrap gap-3 border-b border-white/10 pb-3 bg-black/85 backdrop-blur-xl p-3 rounded-2xl border border-white/10">
+            <div className="flex items-center justify-between flex-wrap gap-3 border-b border-slate-200 dark:border-white/10 pb-3 bg-white/90 dark:bg-black/85 backdrop-blur-xl p-3 rounded-2xl border border-slate-200 dark:border-white/10 shadow-sm">
               <div className="flex items-center gap-2 overflow-x-auto py-1 w-full sm:w-auto">
-                <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1">
+                <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 mr-1 flex items-center gap-1">
                   <Filter className="w-3.5 h-3.5" /> Filter:
                 </span>
                 {[
@@ -347,18 +347,18 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
                       key={cat.id}
                       onClick={() => setActiveFilter(cat.id)}
                       className={`relative px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
-                        isActive ? 'text-white font-bold' : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
+                        isActive ? 'text-slate-900 dark:text-white font-bold' : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/5'
                       }`}
                     >
                       {isActive && (
                         <motion.div
                           layoutId="activeMatchFilter"
-                          className="absolute inset-0 rounded-full bg-white/15 border border-white/25 shadow-sm"
+                          className="absolute inset-0 rounded-full bg-slate-200/80 dark:bg-white/15 border border-slate-300 dark:border-white/25 shadow-sm"
                           transition={{ type: 'spring', stiffness: 500, damping: 35 }}
                         />
                       )}
                       <span className="relative z-10">{cat.label}</span>
-                      <span className="relative z-10 px-1.5 py-0.2 rounded-full bg-white/10 text-[10px] font-mono text-slate-300">
+                      <span className="relative z-10 px-1.5 py-0.2 rounded-full bg-slate-200 dark:bg-white/10 text-[10px] font-mono text-slate-700 dark:text-slate-300">
                         {cat.count}
                       </span>
                     </button>
@@ -366,7 +366,7 @@ Report ID: PLA-${analysis.id.slice(0, 8).toUpperCase()}`;
                 })}
               </div>
 
-              <span className="text-xs font-mono text-slate-400">
+              <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
                 Showing {filteredMatches.length} of {analysis.matches.length} matches
               </span>
             </div>

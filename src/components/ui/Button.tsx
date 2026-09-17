@@ -30,22 +30,25 @@ export const Button: React.FC<ButtonProps> = ({
   const [isHovered, setIsHovered] = useState(false);
 
   const baseStyles =
-    'relative inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
+    'relative inline-flex items-center justify-center font-semibold rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none overflow-hidden';
 
   const sizeStyles = {
-    sm: 'px-3.5 py-1.5 text-xs gap-1.5',
-    md: 'px-5 py-2.5 text-sm gap-2',
-    lg: 'px-7 py-3.5 text-base gap-2.5',
+    sm: 'h-8 px-3.5 text-xs gap-1.5 min-h-[32px]',
+    md: 'h-10 px-5 text-sm gap-2 min-h-[40px]',
+    lg: 'h-12 px-7 text-base gap-2.5 min-h-[48px]',
   };
 
   const variantStyles = {
-    liquid: 'liquid-metal-btn text-white font-semibold',
-    glow: 'bg-white text-black hover:bg-slate-100 font-semibold shadow-[0_0_25px_rgba(255,255,255,0.25)]',
+    liquid:
+      'liquid-metal-btn text-slate-950 dark:text-slate-950 font-bold shadow-sm hover:shadow-md',
+    glow:
+      'bg-slate-900 text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-slate-100 shadow-sm hover:shadow-md',
     outline:
-      'border border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30 text-white shadow-sm hover:shadow-white/5',
-    ghost: 'text-slate-300 hover:text-white hover:bg-white/5',
+      'border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 hover:bg-slate-100 dark:hover:bg-white/10 text-slate-800 dark:text-slate-100 shadow-sm',
+    ghost:
+      'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5',
     danger:
-      'border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-400 hover:border-red-500/50',
+      'border border-red-500/30 bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 hover:border-red-500/50',
   };
 
   const buttonElement = (
@@ -53,15 +56,15 @@ export const Button: React.FC<ButtonProps> = ({
       <motion.button
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        whileHover={disabled ? undefined : { scale: 1.02, y: -1 }}
-        whileTap={disabled ? undefined : { scale: 0.96, y: 0 }}
-        transition={{ type: 'spring', stiffness: 450, damping: 25 }}
+        whileHover={disabled ? undefined : { scale: 1.01, y: -1 }}
+        whileTap={disabled ? undefined : { scale: 0.97, y: 0 }}
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
         className={twMerge(clsx(baseStyles, sizeStyles[size], variantStyles[variant], className))}
         disabled={disabled}
         onClick={onClick}
         {...props}
       >
-        {/* Animated Shine Sweep effect on hover (Requirement 21) */}
+        {/* Animated Shine Sweep effect on hover */}
         {(variant === 'liquid' || variant === 'glow') && (
           <motion.span
             initial={{ x: '-120%', opacity: 0 }}
@@ -71,9 +74,9 @@ export const Button: React.FC<ButtonProps> = ({
           />
         )}
 
-        {/* Animated Border Light Highlight (Requirement 22) */}
+        {/* Animated Border Light Highlight */}
         {(borderGlow || variant === 'glow') && (
-          <span className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-r from-white/0 via-white/50 to-white/0 opacity-60 animate-pulse pointer-events-none" />
+          <span className="absolute inset-0 rounded-xl p-[1px] bg-gradient-to-r from-cyan-500/0 via-cyan-400/40 to-cyan-500/0 opacity-60 animate-pulse pointer-events-none" />
         )}
 
         {icon && <span className="relative z-10 shrink-0">{icon}</span>}

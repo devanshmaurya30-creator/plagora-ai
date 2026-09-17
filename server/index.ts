@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { geminiService, GeminiServiceError } from './services/geminiService.js';
+import { geminiService, GeminiServiceError } from './services/geminiService';
 
 // Load environment variables from root .env file
 dotenv.config();
@@ -424,16 +424,22 @@ app.post('/api/analysis/chat', rateLimiter, async (req, res) => {
 
     res.json(result);
   } catch (err: any) {
+    console.error('[Plagora Server /api/analysis/chat Error]:', err);
+    const detail = err?.message || 'AI Chat encountered a backend service error.';
     res.status(500).json({
-      error: 'AI Chat is temporarily unavailable.',
-      code: 'AI_UNAVAILABLE',
-      reply: 'I am unable to answer based on the current analysis data at this time. Please try again.',
+      error: `AI Chat Service Error (500): ${detail}`,
+      code: err?.code || 'AI_UNAVAILABLE',
     });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`[Plagora AI Server] Running on http://localhost:${PORT}`);
-  console.log(`[Plagora AI Server] AI Provider: ${process.env.AI_PROVIDER || 'mock'}`);
-  console.log(`[Plagora AI Server] API Key Configured: ${Boolean(process.env.GEMINI_API_KEY)}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`[Plagora AI Server] Running on http://localhost:${PORT}`);
+    console.log(`[Plagora AI Server] AI Provider: ${process.env.AI_PROVIDER || 'mock'}`);
+    console.log(`[Plagora AI Server] API Key Configured: ${Boolean(process.env.GEMINI_API_KEY)}`);
+  });
+}
+
+export default app;
+export { app };

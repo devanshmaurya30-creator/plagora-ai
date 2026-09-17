@@ -53,13 +53,14 @@ export function App() {
   return (
     <ErrorBoundary>
       <Router>
-        <div className="min-h-screen bg-black text-slate-100 font-sans selection:bg-white/20 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
+        <div className="min-h-screen bg-[var(--background)] text-[var(--text-primary)] font-sans selection:bg-cyan-500/20 selection:text-cyan-200 flex flex-col justify-between relative overflow-x-hidden transition-colors duration-250">
+          <div className="fixed inset-0 pointer-events-none z-0 bg-[radial-gradient(1000px_circle_at_50%_0%,rgba(8,145,178,0.03),transparent_70%)] dark:bg-[radial-gradient(1000px_circle_at_50%_0%,rgba(6,182,212,0.04),transparent_70%)]" />
           <CursorSpotlight />
           <CommandPalette />
           <KeyboardShortcutHelp />
-          <div>
+          <div className="relative z-10">
             <Navbar />
-            <main>
+            <main className="min-h-[calc(100vh-12rem)] pb-12">
               <AnimatedRoutes />
             </main>
           </div>

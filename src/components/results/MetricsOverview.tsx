@@ -58,7 +58,7 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ analysis }) =>
   ];
 
   return (
-    <div className="rounded-2xl border border-white/15 bg-white/[0.03] backdrop-blur-xl p-6 shadow-2xl space-y-6">
+    <div className="rounded-2xl border border-slate-200 dark:border-white/15 bg-white dark:bg-white/[0.03] backdrop-blur-xl p-6 shadow-xl space-y-6">
       <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
         {/* Left: Score Circular Indicator */}
         <div className="flex flex-col items-center gap-3 shrink-0">
@@ -76,14 +76,14 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ analysis }) =>
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.08 }}
-              className="p-4 rounded-xl border border-white/10 bg-white/[0.02] flex flex-col justify-between"
+              className="p-4 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] flex flex-col justify-between"
             >
-              <span className="text-xs text-slate-400 font-medium">{m.label}</span>
+              <span className="text-xs text-slate-600 dark:text-slate-400 font-medium">{m.label}</span>
               <div className="mt-3">
                 <span className={`text-2xl font-extrabold font-mono ${m.textColor}`}>
                   {m.value}
                 </span>
-                <div className="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                <div className="w-full bg-slate-200 dark:bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
                   <div className={`h-full ${m.barColor}`} style={{ width: m.value }} />
                 </div>
               </div>
@@ -93,27 +93,27 @@ export const MetricsOverview: React.FC<MetricsOverviewProps> = ({ analysis }) =>
       </div>
 
       {/* Analysis Quality Status Bar (Item 29) */}
-      <div className="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
-        <span className="text-slate-400 uppercase tracking-wider text-[10px] font-semibold">
+      <div className="pt-4 border-t border-slate-200 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <span className="text-slate-500 dark:text-slate-400 uppercase tracking-wider text-[10px] font-semibold">
           Analysis Quality Status
         </span>
         <div className="flex items-center gap-4 text-[11px]">
-          <span className="flex items-center gap-1 text-slate-300">
-            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> Local: {analysis.analysisQuality?.localAnalysis || 'Complete'}
+          <span className="flex items-center gap-1 text-slate-700 dark:text-slate-300">
+            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" /> Local: {analysis.analysisQuality?.localAnalysis || 'Complete'}
           </span>
-          <span className="flex items-center gap-1 text-slate-300">
+          <span className="flex items-center gap-1 text-slate-700 dark:text-slate-300">
             {analysis.analysisQuality?.aiAnalysis === 'Unavailable' ? (
-              <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+              <AlertCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             ) : (
-              <CheckCircle2 className="w-3.5 h-3.5 text-blue-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
             )}
             AI: {analysis.analysisQuality?.aiAnalysis || 'Complete'}
           </span>
-          <span className="flex items-center gap-1 text-slate-300">
+          <span className="flex items-center gap-1 text-slate-700 dark:text-slate-300">
             {analysis.analysisQuality?.webVerification === 'Unavailable' ? (
-              <AlertCircle className="w-3.5 h-3.5 text-amber-400" />
+              <AlertCircle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             ) : (
-              <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />
+              <CheckCircle2 className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
             )}
             Web Verification: {analysis.analysisQuality?.webVerification || 'Complete'}
           </span>

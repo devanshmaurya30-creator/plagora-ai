@@ -155,14 +155,14 @@ export const EditorPage: React.FC = () => {
       className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8 min-h-screen select-none"
     >
       {/* Top Header */}
-      <motion.div variants={itemFadeUpVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6">
+      <motion.div variants={itemFadeUpVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl border border-cyan-400/40 bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+          <div className="w-10 h-10 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
             <FileEdit className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-white tracking-tight uppercase">REAL-TIME ORIGINALITY EDITOR</h1>
-            <p className="text-xs text-slate-400">High-End AI Writing Workspace & Originality Inspector</p>
+            <h1 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight uppercase">REAL-TIME ORIGINALITY EDITOR</h1>
+            <p className="text-xs text-slate-600 dark:text-slate-400">High-End AI Writing Workspace & Originality Inspector</p>
           </div>
         </div>
 
@@ -171,7 +171,7 @@ export const EditorPage: React.FC = () => {
           <button
             onClick={() => setShowClearConfirm(true)}
             disabled={!text}
-            className="p-2 text-slate-400 hover:text-red-400 border border-white/10 rounded-xl hover:bg-white/5 transition-colors disabled:opacity-40"
+            className="p-2 text-slate-500 dark:text-slate-400 hover:text-red-600 dark:hover:text-red-400 border border-slate-200 dark:border-white/10 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors disabled:opacity-40 cursor-pointer"
             title="Clear text"
           >
             <Trash2 className="w-4 h-4" />
@@ -208,16 +208,16 @@ export const EditorPage: React.FC = () => {
       )}
 
       {/* Main Text Editor Area */}
-      <motion.div variants={itemFadeUpVariants} className="rounded-3xl border border-white/20 bg-neutral-950 p-6 md:p-8 space-y-4 shadow-2xl relative overflow-hidden">
+      <motion.div variants={itemFadeUpVariants} className="rounded-3xl border border-slate-200 dark:border-white/20 bg-white dark:bg-neutral-950 p-6 md:p-8 space-y-4 shadow-xl relative overflow-hidden">
         <textarea
           value={text}
           onChange={handleTextChange}
           placeholder="Paste or write your document text here to inspect originality, detect paraphrasing, and get AI writing assistance..."
-          className="w-full h-80 bg-transparent text-slate-100 placeholder-slate-600 focus:outline-none resize-y font-sans text-sm leading-relaxed"
+          className="w-full h-80 bg-transparent text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 focus:outline-none resize-y font-sans text-sm leading-relaxed"
         />
 
         {/* Footer Statistics */}
-        <div className="flex items-center justify-between border-t border-white/10 pt-4 text-xs text-slate-400 font-mono">
+        <div className="flex items-center justify-between border-t border-slate-200 dark:border-white/10 pt-4 text-xs text-slate-500 dark:text-slate-400 font-mono">
           <div className="flex items-center gap-4">
             <span>{wordCount.toLocaleString()} words</span>
             <span>•</span>
@@ -226,11 +226,11 @@ export const EditorPage: React.FC = () => {
 
           <div className="flex items-center gap-2">
             {analysisResult && !isOutdated ? (
-              <span className="text-emerald-400 font-semibold flex items-center gap-1">
+              <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5" /> Analyzed ({analysisResult.similarityScore}% similarity)
               </span>
             ) : (
-              <span className="text-slate-500">Ready to analyze</span>
+              <span className="text-slate-400">Ready to analyze</span>
             )}
           </div>
         </div>
@@ -238,7 +238,7 @@ export const EditorPage: React.FC = () => {
 
       {/* Results & Inspection Section (Rendered when analysis exists) */}
       {analysisResult && (
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="space-y-8 pt-4 border-t border-white/10">
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="space-y-8 pt-4 border-t border-slate-200 dark:border-white/10">
           {/* Match Navigation */}
           {analysisResult.matches.length > 0 && (
             <MatchNavigator
@@ -251,17 +251,17 @@ export const EditorPage: React.FC = () => {
           {/* Side-by-Side Comparison & Why Flagged */}
           {selectedMatch && (
             <div className="space-y-6">
-              <div className="rounded-3xl border border-white/20 bg-neutral-950/90 p-6 md:p-8 space-y-4 shadow-2xl">
-                <div className="flex items-center justify-between border-b border-white/10 pb-4">
-                  <span className="text-xs font-bold uppercase tracking-wider text-white flex items-center gap-2 font-mono">
-                    <Layers className="w-4 h-4 text-blue-400" />
+              <div className="rounded-3xl border border-slate-200 dark:border-white/20 bg-white dark:bg-neutral-950/90 p-6 md:p-8 space-y-4 shadow-xl">
+                <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
+                  <span className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2 font-mono">
+                    <Layers className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                     MATCH COMPARISON
                   </span>
 
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setShowWhyFlagged(true)}
-                      className="px-3 py-1.5 rounded-xl border border-blue-400/40 bg-blue-500/10 text-blue-300 text-xs font-medium hover:bg-blue-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
+                      className="px-3 py-1.5 rounded-xl border border-blue-500/30 bg-blue-500/10 text-blue-700 dark:text-blue-300 text-xs font-medium hover:bg-blue-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
                     >
                       <HelpCircle className="w-3.5 h-3.5" />
                       <span>Why Flagged?</span>
@@ -269,7 +269,7 @@ export const EditorPage: React.FC = () => {
 
                     <button
                       onClick={() => setShowRewrite(true)}
-                      className="px-3 py-1.5 rounded-xl border border-cyan-400/40 bg-cyan-500/10 text-cyan-300 text-xs font-medium hover:bg-cyan-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
+                      className="px-3 py-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-xs font-medium hover:bg-cyan-500/20 transition-all flex items-center gap-1.5 cursor-pointer"
                     >
                       <Sparkles className="w-3.5 h-3.5" />
                       <span>Rewrite with AI</span>
@@ -309,10 +309,10 @@ export const EditorPage: React.FC = () => {
       {/* Clear Confirmation Modal */}
       <AnimatePresence>
         {showClearConfirm && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-            <div className="max-w-md w-full rounded-2xl border border-white/20 bg-neutral-900 p-6 space-y-6 text-center">
-              <h3 className="text-lg font-bold text-white">Clear document text?</h3>
-              <p className="text-xs text-slate-400">This will reset your editor text and active analysis state.</p>
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/80 backdrop-blur-md">
+            <div className="max-w-md w-full rounded-2xl border border-slate-200 dark:border-white/20 bg-white dark:bg-neutral-900 p-6 space-y-6 text-center text-slate-900 dark:text-slate-100 shadow-2xl">
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white">Clear document text?</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400">This will reset your editor text and active analysis state.</p>
               <div className="flex items-center justify-center gap-3">
                 <Button variant="outline" size="sm" onClick={() => setShowClearConfirm(false)}>
                   Cancel

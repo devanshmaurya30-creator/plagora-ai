@@ -132,35 +132,35 @@ export const ResearchWorkspace: React.FC<ResearchWorkspaceProps> = ({
   };
 
   return (
-    <div className="flex flex-col h-screen w-full bg-[#050608] text-gray-100 font-sans overflow-hidden">
+    <div className="flex flex-col h-screen w-full bg-white dark:bg-[#050608] text-slate-900 dark:text-gray-100 font-sans overflow-hidden">
       {/* Workspace Top Header Bar */}
-      <div className="h-14 px-6 border-b border-white/10 bg-[#0b0c10] flex items-center justify-between z-20">
+      <div className="h-14 px-6 border-b border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-[#0b0c10] flex items-center justify-between z-20">
         <div className="flex items-center space-x-4">
           <div className="flex items-center space-x-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-            <h1 className="font-bold text-white tracking-wide text-sm">PLAGORA AI — RESEARCH WORKSPACE</h1>
+            <span className="w-2.5 h-2.5 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse" />
+            <h1 className="font-bold text-slate-900 dark:text-white tracking-wide text-sm">PLAGORA AI — RESEARCH WORKSPACE</h1>
           </div>
-          <span className="text-xs text-gray-500 font-mono">| {analysis.documentName} (v1)</span>
+          <span className="text-xs text-slate-500 font-mono">| {analysis.documentName} (v1)</span>
         </div>
 
         {/* Global Action Bar */}
         <div className="flex items-center space-x-3 text-xs">
           <button
             onClick={() => setIsReviewQueueOpen(true)}
-            className="px-3 py-1.5 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 rounded-xl font-bold transition-all flex items-center space-x-1.5"
+            className="px-3 py-1.5 bg-cyan-500/10 dark:bg-cyan-500/20 hover:bg-cyan-500/20 dark:hover:bg-cyan-500/30 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30 dark:border-cyan-500/40 rounded-xl font-bold transition-all flex items-center space-x-1.5 cursor-pointer"
           >
             <CheckCircle className="w-3.5 h-3.5" />
             <span>Review My Document</span>
           </button>
           <button
             onClick={() => setIsFocusModeOpen(true)}
-            className="px-3 py-1.5 bg-white/10 hover:bg-white/20 text-white rounded-xl font-medium transition-all flex items-center space-x-1.5"
+            className="px-3 py-1.5 bg-slate-200/80 dark:bg-white/10 hover:bg-slate-300/80 dark:hover:bg-white/20 text-slate-900 dark:text-white rounded-xl font-medium transition-all flex items-center space-x-1.5 cursor-pointer"
           >
-            <Maximize2 className="w-3.5 h-3.5 text-cyan-400" />
+            <Maximize2 className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Focus Mode</span>
           </button>
           {onClose && (
-            <button onClick={onClose} className="p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/10">
+            <button onClick={onClose} className="p-1.5 text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white rounded-lg hover:bg-slate-200 dark:hover:bg-white/10 cursor-pointer">
               <X className="w-4 h-4" />
             </button>
           )}
@@ -172,22 +172,22 @@ export const ResearchWorkspace: React.FC<ResearchWorkspaceProps> = ({
         {/* ================================================== */}
         {/* LEFT PANEL: Document Sections & Claims (Cols 1-3) */}
         {/* ================================================== */}
-        <div className="lg:col-span-3 bg-[#08090d] border-r border-white/10 flex flex-col h-full overflow-hidden">
-          <div className="p-4 border-b border-white/10 space-y-3">
-            <h2 className="text-xs font-bold text-gray-400 uppercase tracking-wider flex items-center space-x-2">
-              <Layers className="w-4 h-4 text-cyan-400" />
+        <div className="lg:col-span-3 bg-slate-50/80 dark:bg-[#08090d] border-r border-slate-200 dark:border-white/10 flex flex-col h-full overflow-hidden">
+          <div className="p-4 border-b border-slate-200 dark:border-white/10 space-y-3">
+            <h2 className="text-xs font-bold text-slate-600 dark:text-gray-400 uppercase tracking-wider flex items-center space-x-2">
+              <Layers className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
               <span>Document Navigation</span>
             </h2>
 
             {/* Quick Section Filter */}
             <div className="relative">
-              <Search className="w-3.5 h-3.5 text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-3.5 h-3.5 text-slate-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search sections or claims..."
-                className="w-full bg-black/50 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder-gray-500 focus:outline-none focus:border-cyan-500/40"
+                className="w-full bg-white dark:bg-black/50 border border-slate-200 dark:border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-gray-500 focus:outline-none focus:border-cyan-500/40"
               />
             </div>
           </div>

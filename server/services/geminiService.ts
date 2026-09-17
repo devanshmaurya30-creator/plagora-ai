@@ -2,26 +2,30 @@ import { GoogleGenAI } from '@google/genai';
 import {
   SEMANTIC_SIMILARITY_SYSTEM_PROMPT,
   createSemanticSimilarityPrompt,
-} from '../prompts/semanticSimilarity.js';
+} from '../prompts/semanticSimilarity';
 import {
   PARAPHRASE_DETECTION_SYSTEM_PROMPT,
   createParaphrasePrompt,
-} from '../prompts/paraphraseDetection.js';
+} from '../prompts/paraphraseDetection';
 import {
   PASSAGE_CLASSIFICATION_SYSTEM_PROMPT,
   createPassageClassificationPrompt,
-} from '../prompts/passageClassification.js';
+} from '../prompts/passageClassification';
 import {
   MATCH_EXPLANATION_SYSTEM_PROMPT,
   createMatchExplanationPrompt,
-} from '../prompts/matchExplanation.js';
+} from '../prompts/matchExplanation';
 import {
   REWRITE_ORIGINALITY_SYSTEM_PROMPT,
   createRewritePrompt,
-} from '../prompts/rewriteOriginality.js';
-import { extractGroundingSources } from './webSourceService.js';
-import type { VerifiedWebSource } from './webSourceService.js';
-import { searchCache } from './searchCache.js';
+} from '../prompts/rewriteOriginality';
+import {
+  ANALYSIS_CHAT_SYSTEM_PROMPT,
+  createAnalysisChatPrompt,
+} from '../prompts/analysisChat';
+import { extractGroundingSources } from './webSourceService';
+import type { VerifiedWebSource } from './webSourceService';
+import { searchCache } from './searchCache';
 
 export class GeminiServiceError extends Error {
   code: string;
@@ -79,7 +83,7 @@ export interface RewriteResult {
 
 export class GeminiService {
   private ai: GoogleGenAI | null = null;
-  private modelName = 'gemini-2.5-flash';
+  private modelName = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 
   constructor() {
     const apiKey = process.env.GEMINI_API_KEY;
@@ -280,7 +284,6 @@ export class GeminiService {
     userQuestion: string;
   }): Promise<{ reply: string }> {
     const ai = this.ensureClient();
-    const { ANALYSIS_CHAT_SYSTEM_PROMPT, createAnalysisChatPrompt } = await import('../prompts/analysisChat.js');
     const prompt = createAnalysisChatPrompt(data);
 
     return this.executeWithRetry(async () => {

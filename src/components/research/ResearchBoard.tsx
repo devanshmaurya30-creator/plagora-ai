@@ -63,19 +63,19 @@ export const ResearchBoard: React.FC<ResearchBoardProps> = ({
       {/* Top Controls Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-white/10">
         <div className="flex items-center space-x-3">
-          <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-400">
+          <div className="p-2 bg-cyan-500/10 border border-cyan-500/30 rounded-xl text-cyan-600 dark:text-cyan-400">
             <Layout className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-white">Visual Research Command Board</h2>
-            <p className="text-xs text-gray-400">Organize claims, sources, and evidence collections</p>
+            <h2 className="text-base font-bold text-slate-900 dark:text-white">Visual Research Command Board</h2>
+            <p className="text-xs text-slate-600 dark:text-slate-400">Organize claims, sources, and evidence collections</p>
           </div>
         </div>
 
         {/* Collection Selector & View Switcher */}
         <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-1.5 bg-black/40 p-1.5 rounded-xl border border-white/10 text-xs">
-            <Folder className="w-3.5 h-3.5 text-cyan-400 ml-1" />
+          <div className="flex items-center space-x-1.5 bg-slate-100 dark:bg-black/40 p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-xs">
+            <Folder className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 ml-1" />
             <select
               value={activeCollectionId}
               onChange={(e) => {
@@ -83,7 +83,7 @@ export const ResearchBoard: React.FC<ResearchBoardProps> = ({
                 setCards(researchBoardStore.getCards(e.target.value, documentId));
                 setConnections(researchBoardStore.getConnections(e.target.value));
               }}
-              className="bg-transparent text-white focus:outline-none pr-2 font-medium"
+              className="bg-transparent text-slate-900 dark:text-white focus:outline-none text-xs font-medium cursor-pointer pr-2"
             >
               {collections.map((coll) => (
                 <option key={coll.id} value={coll.id} className="bg-[#11131c]">

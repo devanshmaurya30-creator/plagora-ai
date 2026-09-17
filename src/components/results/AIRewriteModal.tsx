@@ -103,33 +103,43 @@ export const AIRewriteModal: React.FC<AIRewriteModalProps> = ({
     }
   };
 
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md select-none">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/60 dark:bg-black/80 backdrop-blur-md select-none overflow-y-auto">
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, filter: 'blur(8px)' }}
-          animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
-          exit={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
-          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-2xl w-full rounded-3xl border border-white/20 bg-neutral-950 p-6 md:p-8 space-y-6 shadow-2xl text-slate-100 relative overflow-hidden"
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl w-full rounded-3xl border border-slate-200 dark:border-white/15 bg-white dark:bg-neutral-950 p-6 md:p-8 space-y-6 shadow-2xl text-slate-900 dark:text-slate-100 relative overflow-hidden my-auto"
         >
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl border border-cyan-400/40 bg-cyan-500/10 flex items-center justify-center text-cyan-400">
+              <div className="w-10 h-10 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-sm font-bold text-white tracking-tight uppercase">ORIGINALITY ASSISTANT</h3>
-                <p className="text-[11px] text-slate-400">AI Writing Assistance — Authentic Sentence Revision</p>
+                <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight uppercase">ORIGINALITY ASSISTANT</h3>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">AI Writing Assistance — Authentic Sentence Revision</p>
               </div>
             </div>
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl border border-white/10 bg-white/5 text-slate-400 hover:text-white transition-colors"
+              className="p-1.5 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors cursor-pointer"
             >
               <X className="w-4 h-4" />
             </button>
@@ -139,10 +149,10 @@ export const AIRewriteModal: React.FC<AIRewriteModalProps> = ({
           <div className="space-y-4">
             {/* Original Passage */}
             <div className="space-y-1.5">
-              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block font-mono">
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block font-mono">
                 BEFORE (ORIGINAL PASSAGE)
               </span>
-              <div className="p-3.5 rounded-2xl border border-white/10 bg-white/[0.02] text-xs text-slate-300 font-sans leading-relaxed">
+              <div className="p-3.5 rounded-2xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-white/[0.02] text-xs text-slate-700 dark:text-slate-300 font-sans leading-relaxed">
                 "{passage}"
               </div>
             </div>
@@ -166,11 +176,11 @@ export const AIRewriteModal: React.FC<AIRewriteModalProps> = ({
                 )}
               </div>
 
-              <div className="p-4 rounded-2xl border border-cyan-500/30 bg-cyan-500/[0.04] text-xs text-white font-sans leading-relaxed min-h-24 relative">
+              <div className="p-4 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 dark:bg-cyan-500/[0.04] text-xs text-slate-900 dark:text-white font-sans leading-relaxed min-h-24 relative">
                 {loading ? (
                   <div className="flex items-center justify-center h-20 space-x-2">
-                    <RefreshCw className="w-5 h-5 text-cyan-400 animate-spin" />
-                    <span className="text-xs text-slate-400">Generating authentic rewrite...</span>
+                    <RefreshCw className="w-5 h-5 text-cyan-500 dark:text-cyan-400 animate-spin" />
+                    <span className="text-xs text-slate-500 dark:text-slate-400">Generating authentic rewrite...</span>
                   </div>
                 ) : (
                   rewrittenText || 'Click Regenerate to produce an original rewrite.'
@@ -179,8 +189,8 @@ export const AIRewriteModal: React.FC<AIRewriteModalProps> = ({
             </div>
 
             {explanation && !loading && (
-              <div className="p-3 rounded-xl border border-white/10 bg-black/50 text-[11px] text-slate-300 leading-relaxed">
-                <span className="font-semibold text-cyan-400">Note: </span>
+              <div className="p-3 rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50 dark:bg-black/50 text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                <span className="font-semibold text-cyan-600 dark:text-cyan-400">Note: </span>
                 {explanation}
               </div>
             )}
@@ -195,11 +205,11 @@ export const AIRewriteModal: React.FC<AIRewriteModalProps> = ({
                 exit={{ opacity: 0, y: 10 }}
                 className="p-4 rounded-2xl border border-amber-500/40 bg-amber-500/10 space-y-3"
               >
-                <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
-                  <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0" />
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-300">
+                  <AlertTriangle className="w-4 h-4 text-amber-500 dark:text-amber-400 shrink-0" />
                   <span>Replace this passage in your active document?</span>
                 </div>
-                <p className="text-[11px] text-slate-300">
+                <p className="text-[11px] text-slate-600 dark:text-slate-300">
                   This will update your active document text. The original report will remain intact.
                 </p>
                 <div className="flex items-center gap-2 pt-1">
@@ -215,11 +225,11 @@ export const AIRewriteModal: React.FC<AIRewriteModalProps> = ({
           </AnimatePresence>
 
           {/* Bottom Actions */}
-          <div className="flex items-center justify-between flex-wrap gap-3 pt-4 border-t border-white/10">
+          <div className="flex items-center justify-between flex-wrap gap-3 pt-4 border-t border-slate-200 dark:border-white/10">
             <button
               onClick={fetchRewrite}
               disabled={loading}
-              className="text-xs text-slate-400 hover:text-white flex items-center gap-1.5 cursor-pointer"
+              className="text-xs text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white flex items-center gap-1.5 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span>Regenerate Rewrite</span>

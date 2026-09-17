@@ -117,26 +117,26 @@ export const Dropzone: React.FC<DropzoneProps> = ({
               onDragLeave={onDragLeave}
               onDrop={onDrop}
               onClick={() => fileInputRef.current?.click()}
-              className={`relative group cursor-pointer rounded-3xl border-2 border-dashed p-8 md:p-14 text-center transition-all duration-300 select-none overflow-hidden ${
+              className={`relative group cursor-pointer rounded-3xl border-2 border-dashed p-6 sm:p-8 md:p-10 text-center transition-all duration-300 select-none overflow-hidden ${
                 isDragging
-                  ? 'border-white/70 bg-white/10 shadow-[0_0_50px_rgba(255,255,255,0.2)] scale-[1.01]'
+                  ? 'border-cyan-500 dark:border-white/70 bg-cyan-500/10 dark:bg-white/10 scale-[1.01] shadow-lg'
                   : fileState === 'ERROR'
                   ? 'border-red-500/40 bg-red-500/[0.03]'
-                  : 'border-white/15 bg-white/[0.02] hover:border-white/35 hover:bg-white/[0.04]'
+                  : 'border-slate-300 dark:border-white/15 bg-white dark:bg-white/[0.02] hover:border-cyan-500/60 dark:hover:border-white/35 hover:bg-slate-50/80 dark:hover:bg-white/[0.04] shadow-sm dark:shadow-xl'
               }`}
             >
-              {/* Idle Slow Breathing Glow (Requirement 28) */}
+              {/* Idle Slow Breathing Glow */}
               <motion.div
-                animate={{ opacity: [0.2, 0.45, 0.2] }}
+                animate={{ opacity: [0.15, 0.35, 0.15] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-indigo-500/10 blur-xl pointer-events-none -z-10"
+                className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500/10 via-purple-500/10 to-indigo-500/10 blur-xl pointer-events-none -z-10"
               />
 
               {/* Desktop Cursor Spotlight Background */}
               <div
-                className="pointer-events-none absolute -inset-px transition-opacity duration-300 opacity-50 hidden md:block"
+                className="pointer-events-none absolute -inset-px transition-opacity duration-300 opacity-30 dark:opacity-50 hidden md:block"
                 style={{
-                  background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(255, 255, 255, 0.08), transparent 40%)`,
+                  background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(8, 145, 178, 0.08), transparent 40%)`,
                 }}
               />
 
@@ -147,67 +147,67 @@ export const Dropzone: React.FC<DropzoneProps> = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0.3, 0.8, 0.3] }}
                     transition={{ duration: 1.5, repeat: Infinity }}
-                    className="absolute top-10 left-1/4 w-2 h-2 rounded-full bg-blue-400 blur-sm"
+                    className="absolute top-10 left-1/4 w-2 h-2 rounded-full bg-cyan-500 blur-sm"
                   />
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: [0.4, 0.9, 0.4] }}
                     transition={{ duration: 1.8, repeat: Infinity, delay: 0.2 }}
-                    className="absolute bottom-12 right-1/4 w-2.5 h-2.5 rounded-full bg-indigo-400 blur-sm"
+                    className="absolute bottom-12 right-1/4 w-2.5 h-2.5 rounded-full bg-indigo-500 blur-sm"
                   />
                 </div>
               )}
 
-              <div className="relative z-10 flex flex-col items-center justify-center gap-4">
-                {/* Animated Floating Upload Icon with Magnetic Response */}
+              <div className="relative z-10 flex flex-col items-center justify-center gap-3">
+                {/* Animated Floating Upload Icon */}
                 <motion.div
                   animate={
                     isDragging
-                      ? { scale: 1.18, y: -8 }
-                      : { y: [0, -5, 0] }
+                      ? { scale: 1.15, y: -6 }
+                      : { y: [0, -3, 0] }
                   }
                   transition={
                     isDragging
                       ? { type: 'spring', stiffness: 400, damping: 25 }
                       : { duration: 3, repeat: Infinity, ease: 'easeInOut' }
                   }
-                  className="w-16 h-16 rounded-2xl border border-white/20 bg-white/10 flex items-center justify-center shadow-lg group-hover:border-white/40 group-hover:bg-white/15 transition-colors"
+                  className="w-14 h-14 rounded-2xl border border-cyan-500/30 dark:border-white/20 bg-cyan-500/10 dark:bg-white/10 flex items-center justify-center shadow-sm group-hover:border-cyan-500/50 group-hover:-translate-y-0.5 transition-all"
                 >
                   <MagneticIcon maxOffset={3}>
-                    <FileUp className="w-8 h-8 text-white" />
+                    <FileUp className="w-7 h-7 text-cyan-600 dark:text-cyan-400" />
                   </MagneticIcon>
                 </motion.div>
 
                 <div className="space-y-1">
-                  <h3 className="text-lg font-semibold text-white tracking-tight">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight">
                     {isDragging ? 'Release to upload document' : 'Drop your document here'}
                   </h3>
-                  <p className="text-xs text-slate-400">PDF • DOCX • TXT</p>
+                  <p className="text-xs font-semibold text-slate-600 dark:text-slate-400">PDF • DOCX • TXT</p>
                 </div>
 
                 {isDragging && (
-                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-white/10 text-slate-200 border border-white/20 shadow-md">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono bg-cyan-500/20 text-cyan-800 dark:text-cyan-300 border border-cyan-500/30 shadow-md">
                     Release to analyze
                   </span>
                 )}
 
-                <div className="pt-2 flex items-center justify-center gap-3">
-                  <Button size="sm" type="button" magnetic>
+                <div className="pt-1 flex items-center justify-center gap-3">
+                  <Button size="sm" type="button" magnetic borderGlow>
                     Choose File
                   </Button>
                 </div>
 
-                <p className="text-[11px] text-slate-500 pt-2">Maximum file size: 20 MB</p>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400">Maximum file size: 20 MB</p>
 
-                {/* Error state alert (Requirement 43) */}
+                {/* Error state alert */}
                 {fileState === 'ERROR' && errorMessage && (
                   <motion.div
                     initial={{ opacity: 0, y: 8, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-4 p-3.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-300 text-xs flex items-center gap-2.5 max-w-md mx-auto"
+                    className="mt-3 p-3.5 rounded-xl border border-red-500/30 bg-red-500/10 text-red-700 dark:text-red-300 text-xs flex items-center gap-2.5 max-w-md mx-auto"
                   >
-                    <AlertCircle className="w-4 h-4 shrink-0 text-red-400" />
+                    <AlertCircle className="w-4 h-4 shrink-0 text-red-500 dark:text-red-400" />
                     <span>{errorMessage}</span>
                   </motion.div>
                 )}
@@ -223,21 +223,21 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             initial={{ opacity: 0, scale: 0.96, filter: 'blur(6px)' }}
             animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, scale: 0.96 }}
-            className="rounded-3xl border border-white/20 bg-white/[0.04] p-10 md:p-12 text-center flex flex-col items-center justify-center gap-4 backdrop-blur-2xl"
+            className="rounded-3xl border border-slate-200 dark:border-white/20 bg-white dark:bg-white/[0.04] p-8 md:p-10 text-center flex flex-col items-center justify-center gap-4 backdrop-blur-2xl shadow-xl"
           >
-            <div className="w-14 h-14 rounded-2xl border border-white/20 bg-white/10 flex items-center justify-center shadow-lg">
-              <Loader2 className="w-7 h-7 text-white animate-spin" />
+            <div className="w-14 h-14 rounded-2xl border border-cyan-500/30 bg-cyan-500/10 flex items-center justify-center shadow-md">
+              <Loader2 className="w-7 h-7 text-cyan-600 dark:text-cyan-400 animate-spin" />
             </div>
             <div className="space-y-1">
-              <h4 className="text-base font-semibold text-white">
+              <h4 className="text-base font-bold text-slate-900 dark:text-white">
                 {fileState === 'READING' ? 'Reading document...' : 'Extracting document text...'}
               </h4>
-              <p className="text-xs text-slate-400">Parsing paragraphs and structure for analysis</p>
+              <p className="text-xs text-slate-600 dark:text-slate-400">Parsing paragraphs and structure for analysis</p>
             </div>
           </motion.div>
         )}
 
-        {/* READY / SELECTED FILE CARD TRANSITION (Requirement 29) */}
+        {/* READY / SELECTED FILE CARD TRANSITION */}
         {(fileState === 'READY' || fileState === 'SELECTED') && parsedDoc && (
           <motion.div
             key="ready-state"
@@ -245,42 +245,42 @@ export const Dropzone: React.FC<DropzoneProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
             exit={{ opacity: 0, scale: 0.95, filter: 'blur(4px)' }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className="rounded-3xl border border-white/25 bg-white/[0.05] p-6 md:p-8 shadow-2xl backdrop-blur-xl hover:border-white/35 transition-all duration-300"
+            className="rounded-3xl border border-slate-200 dark:border-white/25 bg-white dark:bg-white/[0.05] p-5 sm:p-6 md:p-8 shadow-xl backdrop-blur-xl hover:border-cyan-500/40 dark:hover:border-white/35 transition-all duration-300"
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl border border-white/20 bg-white/10 flex items-center justify-center text-white shrink-0 shadow-lg">
+                <div className="w-12 h-12 rounded-2xl border border-slate-200 dark:border-white/20 bg-slate-100 dark:bg-white/10 flex items-center justify-center text-slate-900 dark:text-white shrink-0 shadow-sm">
                   <MagneticIcon maxOffset={2}>
-                    <FileText className="w-6 h-6 text-blue-400" />
+                    <FileText className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                   </MagneticIcon>
                 </div>
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <h4 className="text-base font-semibold text-white truncate max-w-xs sm:max-w-md">
+                    <h4 className="text-base font-bold text-slate-900 dark:text-white truncate max-w-xs sm:max-w-md">
                       {parsedDoc.fileName}
                     </h4>
                     <motion.span
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 0.15 }}
-                      className="flex items-center gap-1 text-[10px] text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 shadow-sm"
+                      className="flex items-center gap-1 text-[10px] text-emerald-700 dark:text-emerald-400 font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 shadow-sm"
                     >
                       <CheckCircle2 className="w-3 h-3" /> Ready
                     </motion.span>
                   </div>
 
-                  {/* Sequential Metadata Stagger Reveal (Requirement 29) */}
+                  {/* Sequential Metadata Stagger Reveal */}
                   <motion.div
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="flex items-center gap-3 text-xs text-slate-400"
+                    className="flex items-center gap-3 text-xs text-slate-600 dark:text-slate-400"
                   >
                     <span>{formatFileSize(parsedDoc.fileSize)}</span>
                     <span>•</span>
-                    <span className="font-mono text-slate-300">{parsedDoc.wordCount.toLocaleString()} words</span>
+                    <span className="font-mono text-slate-800 dark:text-slate-300 font-semibold">{parsedDoc.wordCount.toLocaleString()} words</span>
                     <span>•</span>
-                    <span className="uppercase text-[10px] px-1.5 py-0.5 rounded border border-white/10 bg-white/5 font-mono">
+                    <span className="uppercase text-[10px] px-1.5 py-0.5 rounded border border-slate-200 dark:border-white/10 bg-slate-100 dark:bg-white/5 font-mono">
                       {parsedDoc.fileType}
                     </span>
                   </motion.div>
@@ -288,11 +288,11 @@ export const Dropzone: React.FC<DropzoneProps> = ({
               </div>
 
               {/* Quick Actions */}
-              <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-3 sm:pt-0 border-white/10">
+              <div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end border-t sm:border-t-0 pt-3 sm:pt-0 border-slate-200 dark:border-white/10">
                 <button
                   type="button"
                   onClick={handleRemove}
-                  className="text-xs font-medium text-slate-400 hover:text-red-400 transition-colors flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-white/5"
+                  className="text-xs font-medium text-slate-500 hover:text-red-500 transition-colors flex items-center gap-1 px-2 py-1 rounded-lg hover:bg-slate-100 dark:hover:bg-white/5 cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                   Remove
@@ -320,8 +320,8 @@ export const Dropzone: React.FC<DropzoneProps> = ({
       </AnimatePresence>
 
       {/* Privacy note */}
-      <div className="mt-3.5 flex items-center justify-center gap-1.5 text-[11px] text-slate-500">
-        <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+      <div className="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400 font-medium">
+        <ShieldCheck className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
         <span>Your document is processed securely client-side.</span>
       </div>
     </div>
